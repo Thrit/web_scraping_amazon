@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 from dotenv import load_dotenv
 from sqlalchemy import create_engine
 
-load_dotenv(dotenv_path='environment.env')
+load_dotenv(dotenv_path='.env')
 
 
 def get_data_from_url(url: str) -> None:
