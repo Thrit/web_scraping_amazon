@@ -1,12 +1,16 @@
-import re
+import os
 import requests
 import pandas as pd
 
-from bs4 import BeautifulSoup
 from typing import ClassVar
+from bs4 import BeautifulSoup
+from dotenv import load_dotenv
+from sqlalchemy import create_engine
+
+load_dotenv(dotenv_path='environment.env')
 
 
-def get_data_from_url(url: str) -> object:
+def get_data_from_url(url: str) -> None:
 
     product_url = []
     product_title = []
@@ -46,7 +50,7 @@ def get_data_from_url(url: str) -> object:
         product_amount_ratings.append(get_amount_ratings(item_attributes))
         product_availability.append(get_availability(item_attributes))
 
-    return consolidate_results(
+    df_result = consolidate_results(
         product_url,
         product_title,
         product_price,
@@ -54,6 +58,10 @@ def get_data_from_url(url: str) -> object:
         product_amount_ratings,
         product_availability
     )
+
+    engine_url = f'postgresql://{os.getenv("DB_USER")}:{os.getenv("DB_PASSWORD")}@localhost:5432/{os.getenv("DB_NAME")}'
+    engine = create_engine(engine_url)
+    df_result.to_sql('amazon_data', engine)
 
 
 def get_title(soup: ClassVar) -> str:
