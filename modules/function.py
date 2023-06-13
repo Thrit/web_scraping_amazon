@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 from typing import ClassVar
 
 
-def get_data_from_url(url: str):
+def get_data_from_url(url: str) -> object:
 
     product_url = []
     product_title = []
@@ -45,7 +45,7 @@ def get_data_from_url(url: str):
         product_review.append(get_review(new_page))
         product_available.append(get_available(new_page))
 
-        df_result = consolidate_results(
+        return consolidate_results(
             product_url,
             product_title,
             product_price,
@@ -53,8 +53,6 @@ def get_data_from_url(url: str):
             product_review,
             product_available
         )
-
-    return False
 
 
 def get_title(soup: ClassVar) -> str:
