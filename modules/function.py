@@ -82,8 +82,6 @@ def get_price(soup: ClassVar) -> str:
 
     try:
         return soup.find('span', attrs={'class': 'a-offscreen'}).string.strip()
-        #if not bool(re.search(r'^R\$|\$|€$', price)):
-        #    return soup.find('span', attrs={'class': 'a-color-price a-text-bold'}).string.strip().replace('From ', '')
     except AttributeError:
         return ''
 
