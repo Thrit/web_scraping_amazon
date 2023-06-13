@@ -8,3 +8,8 @@ The idea of this project is to practice a few basic concepts of web scraping. In
 - Rating
 - Review
 - Availability
+
+### Tools/Libs used
+- Requests
+- Pandas
+- BeautifulSoup
