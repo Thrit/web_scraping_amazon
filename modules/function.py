@@ -59,7 +59,7 @@ def get_data_from_url(url: str) -> None:
         product_availability
     )
 
-    engine_url = f'postgresql://{os.getenv("DB_USER")}:{os.getenv("DB_PASSWORD")}@localhost:5432/{os.getenv("DB_NAME")}'
+    engine_url = f'postgresql://{os.getenv("POSTGRES_USER")}:{os.getenv("POSTGRES_PASSWORD")}@localhost:5432/{os.getenv("POSTGRES_DB")}'
     engine = create_engine(engine_url)
     df_result.to_sql('amazon_data', engine)
 
